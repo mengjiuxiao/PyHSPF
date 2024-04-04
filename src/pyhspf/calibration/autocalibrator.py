@@ -19,6 +19,30 @@
 
 # The class should be adaptable to other optimization parameters.
 
+# autocalibrator.py
+#
+# David J. Lampert (djlampert@gmail.com)
+#
+# 包含可用于校准模型的 AutoCalibrator 类。
+# 该类需要 HSPFModel 类、开始和结束日期，以及在运行模拟时的输出位置。
+# 运行模拟时的工作位置。主要功能是
+# 自动校准，它需要 HSPF 变量列表、扰动（百分比
+# 百分比、优化参数和并行化标志作为关键字参数。
+# 关键字参数。校准例程可概括如下：
+#
+# 1. 1. 设置一系列模拟，对相关参数的当前 # 参数值进行小幅扰动。
+# 相关参数的参数值
+# 2. 复制输入 HSPFModel 并调整参数值 # 3.
+# 3. 运行模拟并获得优化参数的效果 # 4.
+# 4. 如果性能有所改善，则调整基准参数值 # 5.
+# 5. 重复，直到达到最大值。
+#
+#代码结构
+#导入模块和库：导入了多个必要的 Python 模块和库，如 os, pickle, datetime, numpy, heapq 等。
+#AutoCalibrator 类定义：定义了一个名为 AutoCalibrator 的类，用于自动校准 HSPF 水文模型。
+#各种方法定义：类内部定义了多个方法，如 create_submodel, copymodel, adjust, run, simulate, perturb, get_default, get_limits, optimize, autocalibrate 等，用于不同的功能，如创建子模型、复制模型、调整参数、运行模拟、执行扰动分析、获取默认值和限制、优化参数以及自动校准水文模型。
+
+
 import os, pickle, datetime, time, numpy, heapq
 
 from multiprocessing  import Pool, cpu_count
@@ -29,7 +53,7 @@ class AutoCalibrator:
     """
     A class to use to autocalibrate an HSPF model.
     """
-
+#类定义：AutoCalibrator
     def __init__(self, 
                  hspfmodel, 
                  start, 
